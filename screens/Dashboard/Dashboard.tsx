@@ -21,7 +21,7 @@ function Dashboard() {
 	const [text, setText] = useState("");
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={styles.container}>
 			<View style={styles.container}>
 				<View style={styles.banner}>
 					<View style={styles.profileHeadDash}>
@@ -123,9 +123,10 @@ export default Dashboard;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		height: "100%",
 		marginTop: 10,
 		padding: 10,
-		backgroundColor: "#fff",
+		backgroundColor: "white",
 	},
 	contentContainer: {
 		paddingVertical: 20,
