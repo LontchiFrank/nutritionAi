@@ -9,13 +9,16 @@ import {
 	TextInput,
 	Image,
 	ScrollView,
-	FlatList,
+	Button,
+	Alert,
+	TouchableOpacity,
 } from "react-native";
 import { diets } from "./data";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconBell from "react-native-vector-icons/Ionicons";
 import IconSearch from "react-native-vector-icons/EvilIcons";
 import IconArrowRight from "react-native-vector-icons/AntDesign";
+import IconClock from "react-native-vector-icons/AntDesign";
 
 function Dashboard() {
 	const [text, setText] = useState("");
@@ -55,64 +58,287 @@ function Dashboard() {
 						style={styles.iconSearch}
 					/>
 				</View>
-				<View style={styles.articleBar}>
-					{/* <View> */}
-					<View style={styles.articleBarView}>
-						<View>
-							<Text style={styles.textArticle}>Articles</Text>
+				<ScrollView>
+					<View style={styles.articleBar}>
+						{/* <View> */}
+						<View style={styles.articleBarView}>
+							<View>
+								<Text style={styles.textArticle}>Articles</Text>
 
-							<Text style={styles.textArticleBody}>
-								Nutrition the healthy diet for a better life
-							</Text>
-							<View style={{ flexDirection: "row" }}>
-								<Text style={styles.textArticleFooter}>Read more</Text>
-								<IconArrowRight
-									name="arrowright"
-									style={{
-										marginLeft: 4,
-										marginTop: 2,
-									}}
-									size={18}
-									color="#762a0c"
-								/>
+								<Text style={styles.textArticleBody}>
+									Nutrition the healthy diet for a better life
+								</Text>
+								<View style={{ flexDirection: "row" }}>
+									<Text style={styles.textArticleFooter}>Read more</Text>
+									<IconArrowRight
+										name="arrowright"
+										style={{
+											marginLeft: 4,
+											marginTop: 2,
+										}}
+										size={18}
+										color="#762a0c"
+									/>
+								</View>
 							</View>
 						</View>
+						<View style={styles.imageView}>
+							<Image
+								source={require(`../../assets/nutrition.png`)}
+								style={styles.image}
+							/>
+						</View>
 					</View>
-					<View style={styles.imageView}>
-						<Image
-							source={require(`../../assets/nutrition.png`)}
-							style={styles.image}
-						/>
+					<View style={styles.categoryLine}>
+						<Text style={styles.categoryText}> Category</Text>
+						<Text style={styles.categorySmallText}>See all</Text>
 					</View>
-				</View>
-				<View style={styles.categoryLine}>
-					<Text style={styles.categoryText}> Category</Text>
-					<Text style={styles.categorySmallText}>See all</Text>
-				</View>
-				<View style={styles.flatListView}>
-					<ScrollView
-						horizontal={true}
-						// style={styles.scrollView}
-						showsHorizontalScrollIndicator={false}
-						contentContainerStyle={styles.contentContainer}>
-						{diets.map((image: any) => (
+					<View style={styles.flatListView}>
+						<ScrollView
+							horizontal={true}
+							// style={styles.scrollView}
+							showsHorizontalScrollIndicator={false}
+							contentContainerStyle={styles.contentContainer}>
+							{diets.map((image: any) => (
+								<View style={{ flexDirection: "column" }}>
+									<View
+										style={{
+											width: 130,
+											height: 130,
+											borderRadius: 10,
+											marginBottom: 8,
+											backgroundColor: `${image.color}`,
+										}}
+										key={image.name}>
+										<Image source={image.img} style={styles.picture} />
+									</View>
+									<Text style={styles.categoriesBoxName}>{image.name}</Text>
+								</View>
+							))}
+						</ScrollView>
+					</View>
+
+					<View style={styles.mealPlan}>
+						<Text style={styles.categoryText}>Today's Meal Plan</Text>
+						<ScrollView
+							horizontal={true}
+							showsHorizontalScrollIndicator={false}
+							contentContainerStyle={styles.contentContainer}>
 							<View style={{ flexDirection: "column" }}>
 								<View
 									style={{
-										width: 130,
-										height: 130,
+										width: 300,
+										height: 180,
 										borderRadius: 10,
-										marginBottom: 8,
-										backgroundColor: `${image.color}`,
-									}}
-									key={image.name}>
-									<Image source={image.img} style={styles.picture} />
+										paddingVertical: 15,
+										paddingHorizontal: 20,
+										backgroundColor: "#2e7151",
+									}}>
+									<Text
+										style={{
+											color: "white",
+											fontSize: 16,
+											fontWeight: "bold",
+											marginBottom: 10,
+										}}>
+										Breakfast
+									</Text>
+									<View
+										style={{ display: "flex", flexDirection: "row", gap: 7 }}>
+										<IconClock name="clockcircleo" size={14} color="#fff" />
+										<Text style={styles.mealPlanBoxText}>8:30am</Text>
+									</View>
+									<Text style={styles.mealPlanBoxTextBody}>
+										Scrambled eggs with vegetables and bread
+									</Text>
+									<TouchableOpacity
+										style={styles.button}
+										onPress={() => Alert.alert("Its GeeksforGeeks !")}>
+										<Text style={styles.buttonText}>Recipe</Text>
+									</TouchableOpacity>
 								</View>
-								<Text style={styles.categoriesBoxName}>{image.name}</Text>
 							</View>
-						))}
-					</ScrollView>
-				</View>
+							<View style={{ flexDirection: "column" }}>
+								<View
+									style={{
+										width: 300,
+										height: 180,
+										borderRadius: 10,
+										paddingVertical: 15,
+										paddingHorizontal: 20,
+										backgroundColor: "#2e7151",
+									}}>
+									<Text
+										style={{
+											color: "white",
+											fontSize: 16,
+											fontWeight: "bold",
+											marginBottom: 10,
+										}}>
+										Breakfast
+									</Text>
+									<View
+										style={{ display: "flex", flexDirection: "row", gap: 7 }}>
+										<IconClock name="clockcircleo" size={14} color="#fff" />
+										<Text style={styles.mealPlanBoxText}>8:30am</Text>
+									</View>
+									<Text style={styles.mealPlanBoxTextBody}>
+										Scrambled eggs with vegetables and bread
+									</Text>
+									<TouchableOpacity
+										style={styles.button}
+										onPress={() => Alert.alert("Its GeeksforGeeks !")}>
+										<Text style={styles.buttonText}>Recipe</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+							<View style={{ flexDirection: "column" }}>
+								<View
+									style={{
+										width: 300,
+										height: 180,
+										borderRadius: 10,
+										paddingVertical: 15,
+										paddingHorizontal: 20,
+										backgroundColor: "#2e7151",
+									}}>
+									<Text
+										style={{
+											color: "white",
+											fontSize: 16,
+											fontWeight: "bold",
+											marginBottom: 10,
+										}}>
+										Breakfast
+									</Text>
+									<View
+										style={{ display: "flex", flexDirection: "row", gap: 7 }}>
+										<IconClock name="clockcircleo" size={14} color="#fff" />
+										<Text style={styles.mealPlanBoxText}>8:30am</Text>
+									</View>
+									<Text style={styles.mealPlanBoxTextBody}>
+										Scrambled eggs with vegetables and bread
+									</Text>
+									<TouchableOpacity
+										style={styles.button}
+										onPress={() => Alert.alert("Its GeeksforGeeks !")}>
+										<Text style={styles.buttonText}>Recipe</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+						</ScrollView>
+					</View>
+					<View style={styles.mealPlan}>
+						<Text style={styles.categoryText}>Today's Work Plan</Text>
+						<ScrollView
+							horizontal={true}
+							showsHorizontalScrollIndicator={false}
+							contentContainerStyle={styles.contentContainer}>
+							<View style={{ flexDirection: "column" }}>
+								<View
+									style={{
+										width: 300,
+										height: 180,
+										borderRadius: 10,
+										paddingVertical: 15,
+										paddingHorizontal: 20,
+										backgroundColor: "#219ebc",
+									}}>
+									<Text
+										style={{
+											color: "white",
+											fontSize: 16,
+											fontWeight: "bold",
+											marginBottom: 10,
+										}}>
+										Breakfast
+									</Text>
+									<View
+										style={{ display: "flex", flexDirection: "row", gap: 7 }}>
+										<IconClock name="clockcircleo" size={14} color="#fff" />
+										<Text style={styles.mealPlanBoxText}>8:30am</Text>
+									</View>
+									<Text style={styles.mealPlanBoxTextBody}>
+										Scrambled eggs with vegetables and bread
+									</Text>
+									<TouchableOpacity
+										style={styles.button}
+										onPress={() => Alert.alert("Its GeeksforGeeks !")}>
+										<Text style={styles.buttonText}>Recipe</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+							<View style={{ flexDirection: "column" }}>
+								<View
+									style={{
+										width: 300,
+										height: 180,
+										borderRadius: 10,
+										paddingVertical: 15,
+										paddingHorizontal: 20,
+										backgroundColor: "#219ebc",
+									}}>
+									<Text
+										style={{
+											color: "white",
+											fontSize: 16,
+											fontWeight: "bold",
+											marginBottom: 10,
+										}}>
+										Breakfast
+									</Text>
+									<View
+										style={{ display: "flex", flexDirection: "row", gap: 7 }}>
+										<IconClock name="clockcircleo" size={14} color="#fff" />
+										<Text style={styles.mealPlanBoxText}>8:30am</Text>
+									</View>
+									<Text style={styles.mealPlanBoxTextBody}>
+										Scrambled eggs with vegetables and bread
+									</Text>
+									<TouchableOpacity
+										style={styles.button}
+										onPress={() => Alert.alert("Its GeeksforGeeks !")}>
+										<Text style={styles.buttonText}>Recipe</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+							<View style={{ flexDirection: "column" }}>
+								<View
+									style={{
+										width: 300,
+										height: 180,
+										borderRadius: 10,
+										paddingVertical: 15,
+										paddingHorizontal: 20,
+										backgroundColor: "#219ebc",
+									}}>
+									<Text
+										style={{
+											color: "white",
+											fontSize: 16,
+											fontWeight: "bold",
+											marginBottom: 10,
+										}}>
+										Breakfast
+									</Text>
+									<View
+										style={{ display: "flex", flexDirection: "row", gap: 7 }}>
+										<IconClock name="clockcircleo" size={14} color="#fff" />
+										<Text style={styles.mealPlanBoxText}>8:30am</Text>
+									</View>
+									<Text style={styles.mealPlanBoxTextBody}>
+										Scrambled eggs with vegetables and bread
+									</Text>
+									<TouchableOpacity
+										style={styles.button}
+										onPress={() => Alert.alert("Its GeeksforGeeks !")}>
+										<Text style={styles.buttonText}>Recipe</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+						</ScrollView>
+					</View>
+				</ScrollView>
 			</View>
 		</SafeAreaView>
 	);
@@ -279,5 +505,37 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		fontWeight: "200",
 		color: "#000",
+	},
+	mealPlan: {
+		width: "100%",
+		paddingTop: 14,
+	},
+	mealPlanBoxText: {
+		color: "white",
+		fontSize: 13,
+		fontWeight: "light",
+		marginBottom: 6,
+	},
+	mealPlanBoxTextBody: {
+		color: "white",
+		fontSize: 16,
+		fontWeight: "light",
+		marginBottom: 16,
+		lineHeight: 23,
+		width: "70%",
+	},
+	button: {
+		backgroundColor: "#fff",
+		height: 40,
+		paddingVertical: 10,
+		paddingHorizontal: 20,
+		borderRadius: 30,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	buttonText: {
+		color: "#762a0c",
+		fontSize: 16,
+		fontWeight: 500,
 	},
 });
