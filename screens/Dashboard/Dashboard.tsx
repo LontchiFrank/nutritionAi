@@ -242,7 +242,7 @@ function Dashboard() {
 										borderRadius: 10,
 										paddingVertical: 15,
 										paddingHorizontal: 20,
-										backgroundColor: "#219ebc",
+										backgroundColor: "#bc6c25",
 									}}>
 									<Text
 										style={{
@@ -276,7 +276,7 @@ function Dashboard() {
 										borderRadius: 10,
 										paddingVertical: 15,
 										paddingHorizontal: 20,
-										backgroundColor: "#219ebc",
+										backgroundColor: "#bc6c25",
 									}}>
 									<Text
 										style={{
@@ -310,7 +310,7 @@ function Dashboard() {
 										borderRadius: 10,
 										paddingVertical: 15,
 										paddingHorizontal: 20,
-										backgroundColor: "#219ebc",
+										backgroundColor: "#bc6c25",
 									}}>
 									<Text
 										style={{

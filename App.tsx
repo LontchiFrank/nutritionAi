@@ -12,6 +12,7 @@ import Learn from "./screens/Learn/Learn";
 import Prices from "./screens/Prices/Prices";
 import Profile from "./screens/Profile/Profile";
 import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const screenOptions: any = {
@@ -44,16 +45,23 @@ export default function App() {
 					name="Home"
 					component={Dashboard}
 					options={{
-						tabBarIcon: (focused: boolean) => {
+						tabBarIcon: ({ focused }) => {
 							return (
 								<View
 									style={{ alignItems: "center", justifyContent: "center" }}>
 									<Ionicons
-										name={focused ? "home-outline" : "home-outline"}
+										name="home-outline"
 										size={20}
 										color={focused ? "#fb5607" : "#000"}
 									/>
-									<Text style={{ fontSize: 12, color: "#000" }}>Home</Text>
+
+									<Text
+										style={{
+											fontSize: 12,
+											color: focused ? "#fb5607" : "black",
+										}}>
+										Home
+									</Text>
 								</View>
 							);
 						},
@@ -63,16 +71,22 @@ export default function App() {
 					name="Category"
 					component={Category}
 					options={{
-						tabBarIcon: (focused: boolean) => {
+						tabBarIcon: ({ focused }) => {
 							return (
 								<View
 									style={{ alignItems: "center", justifyContent: "center" }}>
 									<MaterialIcons
-										name={focused ? "category" : "category"}
+										name="category"
 										size={20}
-										color={focused ? "#fb5607" : "#000"}
+										color={focused ? "#fb5607" : "black"}
 									/>
-									<Text style={{ fontSize: 12, color: "#000" }}>Category</Text>
+									<Text
+										style={{
+											fontSize: 12,
+											color: focused ? "#fb5607" : "black",
+										}}>
+										Category
+									</Text>
 								</View>
 							);
 						},
@@ -82,7 +96,7 @@ export default function App() {
 					name="Learn"
 					component={Learn}
 					options={{
-						tabBarIcon: (focused: boolean) => {
+						tabBarIcon: ({ focused }) => {
 							return (
 								<View
 									style={{
@@ -109,7 +123,7 @@ export default function App() {
 					name="Prices"
 					component={Prices}
 					options={{
-						tabBarIcon: (focused: boolean) => {
+						tabBarIcon: ({ focused }) => {
 							return (
 								<View
 									style={{ alignItems: "center", justifyContent: "center" }}>
@@ -118,7 +132,13 @@ export default function App() {
 										size={20}
 										color={focused ? "#fb5607" : "#000"}
 									/>
-									<Text style={{ fontSize: 12, color: "#000" }}>Wallet</Text>
+									<Text
+										style={{
+											fontSize: 12,
+											color: focused ? "#fb5607" : "black",
+										}}>
+										Wallet
+									</Text>
 								</View>
 							);
 						},
@@ -128,16 +148,22 @@ export default function App() {
 					name="Profile"
 					component={Profile}
 					options={{
-						tabBarIcon: (focused: boolean) => {
+						tabBarIcon: ({ focused }) => {
 							return (
 								<View
 									style={{ alignItems: "center", justifyContent: "center" }}>
 									<MaterialIcons
-										name={focused ? "health-and-safety" : "health-and-safety"}
+										name="health-and-safety"
 										size={20}
 										color={focused ? "#fb5607" : "#000"}
 									/>
-									<Text style={{ fontSize: 12, color: "#000" }}>Profile</Text>
+									<Text
+										style={{
+											fontSize: 12,
+											color: focused ? "#fb5607" : "black",
+										}}>
+										Profile
+									</Text>
 								</View>
 							);
 						},

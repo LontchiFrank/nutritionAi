@@ -1,9 +1,10 @@
 /** @format */
 
 import React from "react";
+import { Text } from "react-native";
 
 function Profile() {
-	return <div>Profile</div>;
+	return <Text>Profile</Text>;
 }
 
 export default Profile;

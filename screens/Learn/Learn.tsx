@@ -1,9 +1,10 @@
 /** @format */
 
 import React from "react";
+import { Text } from "react-native";
 
 function Learn() {
-	return <div>Learn</div>;
+	return <Text>Learn</Text>;
 }
 
 export default Learn;

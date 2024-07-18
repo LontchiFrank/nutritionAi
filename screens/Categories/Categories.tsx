@@ -1,9 +1,10 @@
 /** @format */
 
 import React from "react";
+import { Text } from "react-native";
 
 function Categories() {
-	return <div>Categories</div>;
+	return <Text>Categories</Text>;
 }
 
 export default Categories;
