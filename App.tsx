@@ -113,7 +113,6 @@ export default function App() {
 										size={25}
 										color={focused ? "#fff" : "#fff"}
 									/>
-									{/* <Text style={{ fontSize: 12, color: "#fff" }}>Plan</Text> */}
 								</View>
 							);
 						},
