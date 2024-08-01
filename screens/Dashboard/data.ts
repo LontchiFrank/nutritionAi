@@ -36,7 +36,7 @@ export const diets:any = [
     
 ]
 
-export const categories:Category[] = [
+export const categories:any = [
     {
         id:1,
         planName:'Nutrition Plan' ,

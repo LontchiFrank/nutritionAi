@@ -1,12 +1,27 @@
 /** @format */
 
 import React, { useState } from "react";
-import { Text, View, StyleSheet, TextInput, ScrollView } from "react-native";
+import {
+	Text,
+	View,
+	StyleSheet,
+	TextInput,
+	ScrollView,
+	TouchableOpacity,
+} from "react-native";
 import IconSearch from "react-native-vector-icons/EvilIcons";
 import { categories } from "../Dashboard/data";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation, ParamListBase } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../types/types";
 
-function Categories() {
+type HomeScreenNavigationProp = StackNavigationProp<
+	RootStackParamList,
+	"DetailScreen"
+>;
+
+function Categories({ navigation }: any) {
 	const [text, setText] = useState("");
 	return (
 		<View style={styles.container}>
@@ -39,16 +54,21 @@ function Categories() {
 						horizontal={false}
 						showsHorizontalScrollIndicator={false}
 						contentContainerStyle={styles.cardsContainer}>
-						<View style={styles.cardsWrapper}>
-							{categories.map((image: any) => (
+						{/* <View style={styles.cardsContainer}> */}
+						{categories.map((category: any) => (
+							<TouchableOpacity
+								key={category.id}
+								onPress={() =>
+									navigation.navigate("DetailScreen", { category })
+								}>
 								<View
 									style={{
-										width: "48%",
+										// width: "46%",
 										height: 250,
 										borderRadius: 10,
 										marginBottom: 10,
-										padding: 10, // Add spacing between rows
-										backgroundColor: `${image.color}`,
+										padding: 10,
+										backgroundColor: `${category.color}`,
 										// Shadow for iOS
 										shadowColor: "rgba(100, 100, 111, 0.2)",
 										shadowOffset: { width: 0, height: 7 },
@@ -56,21 +76,20 @@ function Categories() {
 										shadowRadius: 7,
 										// Shadow for Android
 										elevation: 7,
-									}}
-									key={image.id}>
+									}}>
 									<View>
-										<Text style={styles.cardText}>{image.planName} </Text>
+										<Text style={styles.cardText}>{category.planName} </Text>
 									</View>
 									<View>
 										<Text style={styles.cardDescription}>
 											{" "}
-											{image.description}{" "}
+											{category.description}{" "}
 										</Text>
 									</View>
 									<View style={styles.cardBodyIcon}>
 										<Text>
 											<MaterialCommunityIcons
-												name={image.icon}
+												name={category.icon}
 												size={64}
 												color="white"
 											/>
@@ -78,8 +97,9 @@ function Categories() {
 									</View>
 									{/* <Image source={image.img} style={styles.picture} /> */}
 								</View>
-							))}
-						</View>
+							</TouchableOpacity>
+						))}
+						{/* </View> */}
 					</ScrollView>
 				</View>
 			</ScrollView>
@@ -106,6 +126,11 @@ const styles = StyleSheet.create({
 	cardsContainer: {
 		padding: 10,
 		marginTop: 12,
+		width: "100%",
+		display: "flex",
+		flexDirection: "row",
+		flexWrap: "wrap",
+		justifyContent: "space-between",
 	},
 	titleHead: {
 		marginTop: 26,
@@ -135,15 +160,18 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	flatListView: {
-		flexDirection: "row",
+		// flexDirection: "row",
 		flexWrap: "wrap",
-		justifyContent: "space-between",
+		// backgroundColor: "yellow",
+		// justifyContent: "space-between",
 		marginBottom: 42,
 	},
 	cardsWrapper: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		justifyContent: "space-between",
+		// display: "flex",
+		backgroundColor: "teal",
+		// flexDirection: "row",
+		// flexWrap: "wrap",
+		// justifyContent: "space-between",
 	},
 	cardText: {
 		color: "white",
