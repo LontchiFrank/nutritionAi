@@ -15,6 +15,7 @@ import Profile from "./screens/Profile/Profile";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import DetailScreen from "./screens/Categories/Detail";
+import AItext from "./screens/Categories/AItext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -154,6 +155,7 @@ export default function App() {
 					options={{ headerShown: false }}
 				/>
 				<Stack.Screen name="DetailScreen" component={DetailScreen} />
+				{/* <Stack.Screen name="AItextScreen" component={AItext} /> */}
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

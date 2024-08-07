@@ -1,151 +1,147 @@
 /** @format */
 
-// /** @format */
+// import * as React from "react";
+// import { SafeAreaView, StatusBar } from "react-native";
+// import {
+// 	IAppointment,
+// 	IAvailableDates,
+// 	TimeSlotPicker,
+// } from "@dgreasi/react-native-time-slot-picker";
+// import { useState, useEffect } from "react";
+// import moment from "moment";
 
-// import React from "react";
-// import { View, Text, StyleSheet, FlatList } from "react-native";
+// const availableDates: IAvailableDates[] = [
+// 	{
+// 		date: "2023-08-17T21:00:00.000Z", // new Date().toISOString()
+// 		slotTimes: ["08:00-09:00", "09:00-10:00"], // Array<string> of time slots
+// 	},
+// 	{
+// 		date: "2023-08-18T21:00:00.000Z",
+// 		slotTimes: [], // No availability
+// 	},
+// 	{
+// 		date: "2023-08-19T21:00:00.000Z",
+// 		slotTimes: ["08:00-09:00", "09:00-10:00"],
+// 	},
+// ];
 
-// // type Props = {
-// // 	event: any;
-// // 	renderItem: any;
-// // };
-// // { event, renderItem }: Props
+// export default function Calendar() {
+// 	const [dateOfAppointment, setDateOfAppointment] =
+// 		useState<IAppointment | null>(null);
 
-// export const Calendar = () => {
-// 	const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-// 	const timeSlots = [
-// 		{ time: "8:00" },
-// 		{ time: "9:00" },
-// 		// ...
-// 	];
-// 	const events = [
-// 		{
-// 			startTime: "8:30",
-// 			endTime: "9:15",
-// 			title: "Create new style detail page",
-// 		},
-// 		// ...
-// 	];
-// 	const calculateEventTop = (startTime: any) => {
-// 		// Assuming time slots are 30 minutes each and start at 8:00 AM
-// 		const timeSlotHeight = 50; // Adjust based on your design
-// 		const startTimeInMinutes = getTimeInMinutes(startTime); // Convert time to minutes
-// 		const baseTime = 8 * 60; // Starting time in minutes
-// 		const offset = (startTimeInMinutes - baseTime) * timeSlotHeight;
-// 		return offset;
+// 	useEffect(() => {
+
+// 	}, [availableDates]);
+
+// 	const generateWeekSlots = () => {
+// 		const today = moment();
+// 		const endOfWeek = today.clone().endOf("week");
+// 		const slotTimes = ["08:00-09:00", "09:00-10:00"];
+
+// 		return Array.from(
+// 			{ length: endOfWeek.diff(today, "days") + 1 },
+// 			(_, index) => {
+// 				const date = today.clone().add(index, "days");
+// 				return {
+// 					date: date.toISOString(),
+// 					slotTimes,
+// 				};
+// 			}
+// 		);
 // 	};
 
-// 	const getTimeInMinutes = (timeString: any) => {
-// 		const [hours, minutes] = timeString?.split(":");
-// 		return parseInt(hours, 10) * 60 + parseInt(minutes, 10);
-// 	};
-
-// 	const renderDayHeader = ({ item }: any) => (
-// 		<Text style={styles.dayHeader}>{item}</Text>
-// 	);
-// 	const renderTimeSlot = ({ item }: any) => (
-// 		<Text style={styles.timeSlot}>{item.time}</Text>
-// 	);
-// 	const renderEvent = ({ item }: any) => (
-// 		<View style={[styles.event, { top: calculateEventTop(item.startTime) }]}>
-// 			{/* Event details */}
-// 		</View>
-// 	);
+// 	const slots = generateWeekSlots();
+// 	const slotTimes: any = "08:00-09:00";
 
 // 	return (
-// 		<View style={styles.calendarContainer}>
-// 			{/* Day headers */}
-// 			<FlatList
-// 				data={days}
-// 				renderItem={renderEvent}
-// 				horizontal
-// 				keyExtractor={(item) => item}
+// 		<SafeAreaView>
+// 			<StatusBar backgroundColor="transparent" barStyle="dark-content" />
+// 			<TimeSlotPicker
+// 				availableDates={slots}
+// 				setDateOfAppointment={setDateOfAppointment}
 // 			/>
-// 			{/* Time slots and events */}
-// 			{/* ... */}
-// 		</View>
+// 		</SafeAreaView>
 // 	);
-// };
-
-// const styles = StyleSheet.create({
-// 	// Your styles here
-// 	dayHeader: {
-// 		color: "#e9ecef",
-// 	},
-// 	timeSlot: {
-// 		color: "#e9ecef",
-// 	},
-// 	event: {
-// 		// Your event styles here, e.g.,
-// 		position: "absolute",
-// 		left: 0,
-// 		height: 30, // Adjust height as needed
-// 		backgroundColor: "blue", // Example color
-// 	},
-// 	calendarContainer: {
-// 		width: "100%",
-// 	},
-// });
+// }
 
 import * as React from "react";
-import { SafeAreaView, StatusBar } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import {
 	IAppointment,
 	IAvailableDates,
 	TimeSlotPicker,
 } from "@dgreasi/react-native-time-slot-picker";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 
 const availableDates: IAvailableDates[] = [
 	{
-		date: "2023-08-17T21:00:00.000Z", // new Date().toISOString()
+		day: moment(), // new Date().getDate()
+		slotDate: "Fri Aug 18 2023", // new Date().toDateString()
 		slotTimes: ["08:00-09:00", "09:00-10:00"], // Array<string> of time slots
 	},
 	{
-		date: "2023-08-18T21:00:00.000Z",
+		day: 19,
+		slotDate: "Sat Aug 19 2023",
 		slotTimes: [], // No availability
 	},
 	{
-		date: "2023-08-19T21:00:00.000Z",
+		day: 20,
+		slotDate: "Sun Aug 20 2023",
 		slotTimes: ["08:00-09:00", "09:00-10:00"],
 	},
 ];
 
-export default function Calendar() {
+export default function App() {
 	const [dateOfAppointment, setDateOfAppointment] =
 		useState<IAppointment | null>(null);
 
-	useEffect(() => {});
+	useEffect(() => {
+		// Contains the selected time slot in the following format
+		// {"appointmentDate": "Fri Aug 18 2023", "appointmentTime": "18:00-19:00"}
+		console.log("Date of appointment updated: ", dateOfAppointment);
+	}, [dateOfAppointment]);
+
 	const generateWeekSlots = () => {
 		const today = moment();
-		const endOfWeek = moment().endOf("week");
+		const endOfWeek = today.clone().endOf("week");
 		const slotTimes = ["08:00-09:00", "09:00-10:00"];
-		const weekSlots = [];
 
-		for (let date = today; date.isBefore(endOfWeek); date.add(1, "days")) {
-			weekSlots.push({
-				date: date.clone().startOf("day").toISOString(),
-				slotTimes,
-			});
-		}
-
-		return weekSlots;
+		return Array.from(
+			{ length: endOfWeek.diff(today, "days") + 1 },
+			(_, index) => {
+				const date = today.clone().add(index, "days");
+				return {
+					date: date.toISOString(), // Assuming IAvailableDates expects a string for date
+					slotTimes,
+				};
+			}
+		);
 	};
-	const slots = generateWeekSlots();
-	const slotTimes: any = "08:00-09:00";
-	useEffect(() => {
-		// Contains the selected date, time slot in the following format
-		// {"appointmentDate": "2023-08-17T21:00:00.000Z", "appointmentTime": "18:00-19:00"}
-		console.log("Date of appointment updated: ", slots);
-	}, []);
+
+	const weekSlots = generateWeekSlots().map((slot) => ({
+		...slot,
+		date: slot.date as string,
+		slotTimes: slot.slotTimes as string[],
+	}));
+
 	return (
-		<SafeAreaView>
-			<StatusBar backgroundColor="transparent" barStyle="dark-content" />
-			<TimeSlotPicker
-				availableDates={slots}
-				setDateOfAppointment={setDateOfAppointment}
-			/>
-		</SafeAreaView>
+		<View style={styles.container}>
+			<SafeAreaView>
+				<TimeSlotPicker
+					availableDates={availableDates}
+					setDateOfAppointment={setDateOfAppointment}
+				/>
+			</SafeAreaView>
+		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: "flex-start",
+		justifyContent: "flex-start",
+		flexDirection: "column",
+	},
+});
