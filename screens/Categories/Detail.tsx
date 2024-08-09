@@ -1,12 +1,13 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Calendar from "../../components/Calendar";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/types";
 import * as GoogleGenerativeAI from "@google/generative-ai";
 import { ScrollView } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type DetailScreenRouteProp = RouteProp<RootStackParamList, "DetailScreen">;
 
@@ -22,6 +23,29 @@ const DetailScreen = ({ navigation }: DetailScreenProps) => {
 		goals: "loosing weight",
 		allergies: "pepper",
 	});
+	const [user, setUser] = useState<any>();
+
+	useEffect(() => {
+		const loadName = async () => {
+			try {
+				const storedNameString = await AsyncStorage.getItem("data");
+				const storedName = storedNameString
+					? JSON.parse(storedNameString)
+					: null;
+				if (storedName !== null) {
+					setUser(storedName); // Parse the stored data
+				}
+				console.log(storedName);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		loadName();
+	}, []);
+
+	console.log(user?.age);
+
 	const [dietPlan, setDietPlan] = useState<any>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 	const route = useRoute();
@@ -179,7 +203,7 @@ const DetailScreen = ({ navigation }: DetailScreenProps) => {
 		try {
 			const genAI = new GoogleGenerativeAI.GoogleGenerativeAI(API_KEY);
 			const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-			const prompt = `Create a detailed nutrition plan for a ${userData.age}-year-old, ${userData.weight} lbs, ${userData.height} ft person with a goal of ${userData.goals}. Avoid ${userData.allergies}. Include meal times with  image of the meal, food items images, and calorie counts. `;
+			const prompt = `Create only a detailed nutrition plan and not a sport plan for a ${user?.age}-year-old, ${user?.weight} lbs, ${user?.height} ft person with a goal of ${user.goal}. Avoid ${user?.allergies}. Include meal times with  image of the meal, food items images, and calorie counts. `;
 			const result = await model.generateContent(prompt);
 
 			const response = result.response;

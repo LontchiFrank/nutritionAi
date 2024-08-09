@@ -42,7 +42,8 @@ export const categories:any = [
         planName:'Nutrition Plan' ,
         color: "#e36414",
         description:" Consuming a variety of foods from all food groups to ensure a balanced intake of nutrients.",
-        icon: "food-turkey"
+        icon: "food-turkey",
+        prompt:"Create a detailed nutrition plan for a ${userData.age}-year-old, ${userData.weight} lbs, ${userData.height} ft person with a goal of ${userData.goals}. Avoid ${userData.allergies}. Include meal times with  image of the meal, food items images, and calorie counts."
 
     },
     {

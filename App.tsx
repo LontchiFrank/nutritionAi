@@ -16,6 +16,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import DetailScreen from "./screens/Categories/Detail";
 import AItext from "./screens/Categories/AItext";
+import PersonalInfo from "./screens/Personal/PersonlInfo";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -149,6 +150,11 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator initialRouteName="Home">
+				<Stack.Screen
+					name="Personal Info"
+					component={PersonalInfo}
+					options={{ headerShown: false }}
+				/>
 				<Stack.Screen
 					name="Main"
 					component={MainTabs}
