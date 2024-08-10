@@ -8,6 +8,7 @@ import { RootStackParamList } from "../../types/types";
 import * as GoogleGenerativeAI from "@google/generative-ai";
 import { ScrollView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LottieView from "lottie-react-native";
 
 type DetailScreenRouteProp = RouteProp<RootStackParamList, "DetailScreen">;
 
@@ -94,116 +95,13 @@ const DetailScreen = ({ navigation }: DetailScreenProps) => {
 		return mealData;
 	};
 
-	// function parseMealData(text: string) {
-	// 	const mealData: Array<{
-	// 		title: string;
-	// 		description: string;
-	// 		imageUrl: string | null;
-	// 	}> = [];
-
-	// 	// Split the input text into lines
-	// 	const meals = text.split("\n");
-
-	// 	meals.forEach((mealString) => {
-	// 		const imageRegex = /\[(?:.*?)\]\((https?:\/\/[^\s\)]+)\)/;
-	// 		const additionalImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/;
-
-	// 		// Split each meal string into lines
-	// 		const lines = mealString.split("\n");
-
-	// 		// Extract title and description, removing unwanted characters
-	// 		const title = lines[0]?.replace(/[\*\#]/g, "").trim();
-	// 		const description = lines[1]?.replace(/[\*\#]/g, "").trim();
-
-	// 		// Extract image URL from AI response or additional link
-	// 		const imageMatch = imageRegex.exec(mealString);
-	// 		const additionalImageMatch = additionalImageRegex.exec(mealString);
-	// 		const imageUrl = imageMatch
-	// 			? imageMatch[1]
-	// 			: additionalImageMatch
-	// 			? additionalImageMatch[2]
-	// 			: null;
-
-	// 		mealData.push({
-	// 			title: title || "",
-	// 			description: description || "",
-	// 			imageUrl,
-	// 		});
-	// 	});
-
-	// 	const handleGeneratePlan = async () => {
-	// 		setLoading(true);
-	// 		try {
-	// 			const genAI = new GoogleGenerativeAI.GoogleGenerativeAI(API_KEY);
-	// 			const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-	// 			const prompt = `Create a detailed nutrition plan for a ${userData.age}-year-old, ${userData.weight} lbs, ${userData.height} ft person with a goal of ${userData.goals}. Avoid ${userData.allergies}. Include meal times with url links of image of the meal, food items images, and calorie counts. `;
-	// 			const result = await model.generateContent(prompt);
-
-	// 			const response = result.response;
-	// 			const text = response.text();
-	// 			// navigation.navigate("AItextScreen", { response: response.text() });
-	// 			const mealData = parseMealData(text);
-	// 			console.log(mealData);
-
-	// 			// Process the response to extract meal plans, timings, and food items
-	// 			setDietPlan(mealData);
-	// 		} catch (error) {
-	// 			throw error;
-	// 		} finally {
-	// 			setLoading(false);
-	// 		}
-	// 	};
-
-	// 	return (
-	// 		<View style={styles.container}>
-	// 			<Text style={styles.title}>My {category?.planName}</Text>
-
-	// 			{/* Add more details about the category here */}
-	// 			<ScrollView>
-	// 				<View style={{ paddingHorizontal: 20 }}>
-	// 					{/* User input fields    event={dietPlan} renderItem={renderItem}*/}
-	// 					<TouchableOpacity
-	// 						style={styles.generateButton}
-	// 						onPress={handleGeneratePlan}>
-	// 						<Text style={styles.buttonText}>Generate Diet Plan</Text>
-	// 					</TouchableOpacity>
-	// 					<View style={{ width: "100%" }}>
-	// 						{loading ? (
-	// 							<View style={styles.load}>
-	// 								{/* <LoadSVG style={{ width: "100%", height: "100%" }} /> */}
-	// 								<Image source={require("../../assets/load.svg")} />
-	// 								{/* <SvgUri width="200" height="200" svgXmlData={LoadSVG} /> */}
-	// 							</View>
-	// 						) : null}
-	// 					</View>
-	// 					{/* {dietPlan?.length > 0 ? ( */}
-	// 					<View>
-	// 						{dietPlan &&
-	// 							dietPlan?.map((meal: any, index: any) => (
-	// 								<View key={index} style={styles.mealContainer}>
-	// 									<Text style={styles.mealTitle}>{meal.title}</Text>
-	// 									<Text style={styles.mealDescription}>
-	// 										{meal.description}
-	// 									</Text>
-	// 									<Image
-	// 										source={{ uri: meal.imageUrl }}
-	// 										style={styles.mealImage}
-	// 									/>
-	// 								</View>
-	// 							))}
-	// 					</View>
-	// 				</View>
-	// 			</ScrollView>
-	// 		</View>
-	// 	);
-	// }
-
 	const handleGeneratePlan = async () => {
-		setLoading(true);
 		try {
+			setLoading(true);
+
 			const genAI = new GoogleGenerativeAI.GoogleGenerativeAI(API_KEY);
 			const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-			const prompt = `Create only a detailed nutrition plan and not a sport plan for a ${user?.age}-year-old, ${user?.weight} lbs, ${user?.height} ft person with a goal of ${user.goal}. Avoid ${user?.allergies}. Include meal times with  image of the meal, food items images, and calorie counts. `;
+			const prompt = category?.prompt;
 			const result = await model.generateContent(prompt);
 
 			const response = result.response;
@@ -227,12 +125,18 @@ const DetailScreen = ({ navigation }: DetailScreenProps) => {
 
 			{/* Add more details about the category here */}
 			<ScrollView>
-				<View style={{ paddingHorizontal: 20 }}>
+				<View style={{ paddingHorizontal: 20, paddingBottom: 35 }}>
 					{/* User input fields    event={dietPlan} renderItem={renderItem}*/}
 					<TouchableOpacity
-						style={styles.generateButton}
+						style={{
+							padding: 14,
+							borderRadius: 5,
+							width: "45%",
+							marginBottom: 10,
+							backgroundColor: `${category.color}`,
+						}}
 						onPress={handleGeneratePlan}>
-						<Text style={styles.buttonText}>Generate Diet Plan</Text>
+						<Text style={styles.buttonText}>Generate {category.planName}</Text>
 					</TouchableOpacity>
 					<View style={{ width: "100%" }}>
 						{loading ? (
@@ -265,10 +169,24 @@ const DetailScreen = ({ navigation }: DetailScreenProps) => {
 									</View>
 								))}
 							</View>
+						) : loading ? (
+							<View>
+								<LottieView
+									source={require("../../assets/Animation - 1723216806189.json")}
+									autoPlay
+									loop
+									style={{
+										width: "100%",
+										height: 120,
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
+								/>
+								<Text style={{ textAlign: "center" }}> Loading...</Text>
+							</View>
 						) : (
-							!loading && (
-								<Text>No diet plan available. Generate one above.</Text>
-							)
+							<Text>No {category.planName} available. Generate one below.</Text>
 						)}
 					</View>
 				</View>
@@ -281,6 +199,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
+		marginBottom: 10,
 	},
 	title: {
 		fontSize: 24,
@@ -290,7 +209,6 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	generateButton: {
-		backgroundColor: "#e36414",
 		padding: 14,
 		borderRadius: 5,
 		fontSize: 16,
