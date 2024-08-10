@@ -113,7 +113,7 @@ const PersonalInfo: React.FC<Props> = ({ navigation }) => {
 				</View>
 				<TextInput
 					style={styles.input}
-					placeholder="Enter your weight"
+					placeholder="Enter your Name"
 					value={personName}
 					onChangeText={(e: any) => setFormData({ ...formData, personName: e })}
 				/>
@@ -137,7 +137,8 @@ const PersonalInfo: React.FC<Props> = ({ navigation }) => {
 				</View>
 				<TextInput
 					style={styles.input}
-					placeholder="Enter your weight"
+					placeholder="Enter your Age"
+					keyboardType="numeric"
 					value={age}
 					onChangeText={(e: any) => setFormData({ ...formData, age: e })}
 				/>
@@ -161,6 +162,7 @@ const PersonalInfo: React.FC<Props> = ({ navigation }) => {
 				</View>
 				<TextInput
 					style={styles.input}
+					keyboardType="numeric"
 					placeholder="e.g 154 lbs"
 					value={weight}
 					onChangeText={(e: any) => setFormData({ ...formData, weight: e })}
@@ -186,6 +188,7 @@ const PersonalInfo: React.FC<Props> = ({ navigation }) => {
 				</View>
 				<TextInput
 					style={styles.input}
+					keyboardType="numeric"
 					placeholder="E.g 6'1 ft6'3 "
 					value={height}
 					onChangeText={(e: any) => setFormData({ ...formData, height: e })}
@@ -295,7 +298,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: "#f0f0f0",
+		backgroundColor: "#fff",
 		padding: 16,
 	},
 	title: {
@@ -326,15 +329,6 @@ const styles = StyleSheet.create({
 		justifyContent: "space-around",
 		width: "80%",
 	},
-	// button: {
-	// 	backgroundColor: "#007BFF",
-	// 	padding: 10,
-	// 	borderRadius: 5,
-	// },
-	// buttonText: {
-	// 	color: "#fff",
-	// 	fontSize: 16,
-	// },
 	button: {
 		backgroundColor: "#762a0c",
 		paddingVertical: 15,
