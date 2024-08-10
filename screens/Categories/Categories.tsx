@@ -8,6 +8,7 @@ import {
 	TextInput,
 	ScrollView,
 	TouchableOpacity,
+	Dimensions,
 } from "react-native";
 import IconSearch from "react-native-vector-icons/EvilIcons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -24,7 +25,7 @@ type HomeScreenNavigationProp = StackNavigationProp<
 function Categories({ navigation }: any) {
 	const [text, setText] = useState("");
 	const [user, setUser] = useState<any>();
-
+	const screenWidth = Dimensions.get("window").width;
 	useEffect(() => {
 		const loadName = async () => {
 			try {
@@ -141,7 +142,6 @@ function Categories({ navigation }: any) {
 						horizontal={false}
 						showsHorizontalScrollIndicator={false}
 						contentContainerStyle={styles.cardsContainer}>
-						{/* <View style={styles.cardsContainer}> */}
 						{categories.map((category: any) => (
 							<TouchableOpacity
 								key={category.id}
@@ -150,18 +150,15 @@ function Categories({ navigation }: any) {
 								}>
 								<View
 									style={{
-										// width: "46%",
+										width: (screenWidth - 30) / 2,
 										height: 250,
 										borderRadius: 10,
-										marginBottom: 10,
 										padding: 10,
 										backgroundColor: `${category.color}`,
-										// Shadow for iOS
 										shadowColor: "rgba(100, 100, 111, 0.2)",
 										shadowOffset: { width: 0, height: 7 },
 										shadowOpacity: 0.29,
 										shadowRadius: 7,
-										// Shadow for Android
 										elevation: 7,
 									}}>
 									<View>
@@ -182,11 +179,9 @@ function Categories({ navigation }: any) {
 											/>
 										</Text>
 									</View>
-									{/* <Image source={image.img} style={styles.picture} /> */}
 								</View>
 							</TouchableOpacity>
 						))}
-						{/* </View> */}
 					</ScrollView>
 				</View>
 			</ScrollView>
@@ -201,6 +196,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: "100%",
 		marginTop: 10,
+		marginBottom: 30,
 		padding: 10,
 		backgroundColor: "white",
 	},
@@ -211,13 +207,10 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 	},
 	cardsContainer: {
-		padding: 10,
-		marginTop: 12,
-		width: "100%",
 		display: "flex",
 		flexDirection: "row",
 		flexWrap: "wrap",
-		justifyContent: "space-between",
+		gap: 8,
 	},
 	titleHead: {
 		marginTop: 26,

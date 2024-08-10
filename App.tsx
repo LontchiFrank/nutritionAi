@@ -66,25 +66,7 @@ function MainTabs() {
 					),
 				}}
 			/>
-			<Tab.Screen
-				name="Category"
-				component={Category}
-				options={{
-					tabBarIcon: ({ focused }) => (
-						<View style={{ alignItems: "center", justifyContent: "center" }}>
-							<MaterialIcons
-								name="category"
-								size={20}
-								color={focused ? "#fb5607" : "black"}
-							/>
-							<Text
-								style={{ fontSize: 12, color: focused ? "#fb5607" : "black" }}>
-								Category
-							</Text>
-						</View>
-					),
-				}}
-			/>
+
 			<Tab.Screen
 				name="Learn"
 				component={Learn}
@@ -106,38 +88,19 @@ function MainTabs() {
 				}}
 			/>
 			<Tab.Screen
-				name="Prices"
-				component={Prices}
-				options={{
-					tabBarIcon: ({ focused }) => (
-						<View style={{ alignItems: "center", justifyContent: "center" }}>
-							<AntDesign
-								name="wallet"
-								size={20}
-								color={focused ? "#fb5607" : "#000"}
-							/>
-							<Text
-								style={{ fontSize: 12, color: focused ? "#fb5607" : "black" }}>
-								Wallet
-							</Text>
-						</View>
-					),
-				}}
-			/>
-			<Tab.Screen
-				name="Profile"
-				component={Profile}
+				name="Category"
+				component={Category}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<View style={{ alignItems: "center", justifyContent: "center" }}>
 							<MaterialIcons
-								name="health-and-safety"
+								name="category"
 								size={20}
-								color={focused ? "#fb5607" : "#000"}
+								color={focused ? "#fb5607" : "black"}
 							/>
 							<Text
 								style={{ fontSize: 12, color: focused ? "#fb5607" : "black" }}>
-								Profile
+								Category
 							</Text>
 						</View>
 					),
@@ -167,7 +130,6 @@ export default function App() {
 					options={{ headerShown: false }}
 				/>
 				<Stack.Screen name="DetailScreen" component={DetailScreen} />
-				{/* <Stack.Screen name="AItextScreen" component={AItext} /> */}
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
