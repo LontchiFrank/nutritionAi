@@ -91,15 +91,6 @@ function Categories({ navigation }: any) {
 			icon: "meditation",
 			prompt: `Create only a well detailed Meditation Plan for a ${user?.age}-year-old, ${user?.weight} lbs, ${user?.height} ft person with a goal of ${user?.goal}. Avoid ${user?.allergies}. Include meditation times with  image of the meditations and different techniques and when to apply them using the calendar. `,
 		},
-		// {
-		// 	id: 4,
-		// 	planName: "Sex Plan",
-		// 	color: "#780000",
-		// 	description:
-		// 		"Consistent engagement in a personalized intimacy plan to enhance connection, boost satisfaction, and strengthen your relationship",
-		// 	icon: "robot-love",
-		// 	prompt: `Create only a well detailed Sex Plan for a ${user?.age}-year-old, ${user?.weight} lbs, ${user?.height} ft person with a goal of ${user?.goal}. Avoid ${user?.allergies}. Include sex times, sex positions to help in my health.`,
-		// },
 		{
 			id: 4,
 			planName: "Therapy Plan",
